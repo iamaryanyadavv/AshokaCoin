@@ -1,5 +1,5 @@
 {
-  "contractName": "AshokaToken",
+  "contractName": "AshokaCoin",
   "abi": [
     {
       "inputs": [],
@@ -23,17 +23,17 @@
       "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.5.17+commit.d19bba13\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"constant\":true,\"inputs\":[],\"name\":\"totalSupply\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"project:/contracts/AshokaCoin.sol\":\"AshokaToken\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/AshokaCoin.sol\":{\"keccak256\":\"0x7b4adb2a4b726ff02182272ed3e8d5dcd702debe5c26dadfd6a99e5a15f5fa08\",\"urls\":[\"bzz-raw://a922a7095793816cdceaec462e6fc2db15ab144793b8050c9cf104d715851623\",\"dweb:/ipfs/QmR1P96jL4UbALtLZs8qG3cJQo2kWXtiPFJRAtfHLiDuUg\"]}},\"version\":1}",
-  "bytecode": "0x6080604052348015600f57600080fd5b50620f42406000819055506084806100286000396000f3fe6080604052348015600f57600080fd5b506004361060285760003560e01c806318160ddd14602d575b600080fd5b60336049565b6040518082815260200191505060405180910390f35b6000548156fea265627a7a72315820af933322ccf49828ed5ec8284490ded1094fca3a910ee0fa4ab7d727aa6e1e7b64736f6c63430005110032",
-  "deployedBytecode": "0x6080604052348015600f57600080fd5b506004361060285760003560e01c806318160ddd14602d575b600080fd5b60336049565b6040518082815260200191505060405180910390f35b6000548156fea265627a7a72315820af933322ccf49828ed5ec8284490ded1094fca3a910ee0fa4ab7d727aa6e1e7b64736f6c63430005110032",
-  "sourceMap": "66:202:0:-;;;145:72;8:9:-1;5:2;;;30:1;27;20:12;5:2;145:72:0;190:7;176:11;:21;;;;66:202;;;;;;",
-  "deployedSourceMap": "66:202:0:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;66:202:0;;;;;;;;;;;;;;;;;;;94:26;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;:::o",
-  "source": "// SPDX-License-Identifier: MIT\npragma solidity >=0.4.22 <0.9.0;\n\ncontract AshokaToken {\n\n    uint256 public totalSupply;\n\n    //Constructor\n    constructor() public {\n        totalSupply = 1000000; // 5 million\n    }\n\n    //Set total tokens\n    //Read total tokens\n\n}",
+  "metadata": "{\"compiler\":{\"version\":\"0.5.17+commit.d19bba13\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"constant\":true,\"inputs\":[],\"name\":\"totalSupply\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"project:/contracts/AshokaCoin.sol\":\"AshokaCoin\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/AshokaCoin.sol\":{\"keccak256\":\"0x82d7b5cd2887197fa62da4fdc3b339078eee5efce9e6c40de6668955f5782dbc\",\"urls\":[\"bzz-raw://6601700ad79b3174d55f772d073f03febfde85b5825e12cb8225abefef692f84\",\"dweb:/ipfs/QmVLXQ7N5XnVwdXbrKeQEqBRH6zUoC98LZyhcqEpqHf37x\"]}},\"version\":1}",
+  "bytecode": "0x6080604052348015600f57600080fd5b50620f42406000819055506084806100286000396000f3fe6080604052348015600f57600080fd5b506004361060285760003560e01c806318160ddd14602d575b600080fd5b60336049565b6040518082815260200191505060405180910390f35b6000548156fea265627a7a72315820eb228248710384eea39a22d8145c1bf46595ca0d911d780f8c4f9a022112848e64736f6c63430005110032",
+  "deployedBytecode": "0x6080604052348015600f57600080fd5b506004361060285760003560e01c806318160ddd14602d575b600080fd5b60336049565b6040518082815260200191505060405180910390f35b6000548156fea265627a7a72315820eb228248710384eea39a22d8145c1bf46595ca0d911d780f8c4f9a022112848e64736f6c63430005110032",
+  "sourceMap": "66:201:0:-;;;144:72;8:9:-1;5:2;;;30:1;27;20:12;5:2;144:72:0;189:7;175:11;:21;;;;66:201;;;;;;",
+  "deployedSourceMap": "66:201:0:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;66:201:0;;;;;;;;;;;;;;;;;;;93:26;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;:::o",
+  "source": "// SPDX-License-Identifier: MIT\npragma solidity >=0.4.22 <0.9.0;\n\ncontract AshokaCoin {\n\n    uint256 public totalSupply;\n\n    //Constructor\n    constructor() public {\n        totalSupply = 1000000; // 5 million\n    }\n\n    //Set total tokens\n    //Read total tokens\n\n}",
   "sourcePath": "/Users/admin/ashoka coin/AshokaCoin/contracts/AshokaCoin.sol",
   "ast": {
     "absolutePath": "project:/contracts/AshokaCoin.sol",
     "exportedSymbols": {
-      "AshokaToken": [
+      "AshokaCoin": [
         12
       ]
     },
@@ -64,7 +64,7 @@
         "linearizedBaseContracts": [
           12
         ],
-        "name": "AshokaToken",
+        "name": "AshokaCoin",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
@@ -73,7 +73,7 @@
             "name": "totalSupply",
             "nodeType": "VariableDeclaration",
             "scope": 12,
-            "src": "94:26:0",
+            "src": "93:26:0",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -84,7 +84,7 @@
               "id": 2,
               "name": "uint256",
               "nodeType": "ElementaryTypeName",
-              "src": "94:7:0",
+              "src": "93:7:0",
               "typeDescriptions": {
                 "typeIdentifier": "t_uint256",
                 "typeString": "uint256"
@@ -97,7 +97,7 @@
             "body": {
               "id": 10,
               "nodeType": "Block",
-              "src": "166:51:0",
+              "src": "165:51:0",
               "statements": [
                 {
                   "expression": {
@@ -114,7 +114,7 @@
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
                       "referencedDeclaration": 3,
-                      "src": "176:11:0",
+                      "src": "175:11:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
                         "typeString": "uint256"
@@ -132,7 +132,7 @@
                       "kind": "number",
                       "lValueRequested": false,
                       "nodeType": "Literal",
-                      "src": "190:7:0",
+                      "src": "189:7:0",
                       "subdenomination": null,
                       "typeDescriptions": {
                         "typeIdentifier": "t_rational_1000000_by_1",
@@ -140,7 +140,7 @@
                       },
                       "value": "1000000"
                     },
-                    "src": "176:21:0",
+                    "src": "175:21:0",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -148,7 +148,7 @@
                   },
                   "id": 9,
                   "nodeType": "ExpressionStatement",
-                  "src": "176:21:0"
+                  "src": "175:21:0"
                 }
               ]
             },
@@ -163,32 +163,32 @@
               "id": 4,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "156:2:0"
+              "src": "155:2:0"
             },
             "returnParameters": {
               "id": 5,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "166:0:0"
+              "src": "165:0:0"
             },
             "scope": 12,
-            "src": "145:72:0",
+            "src": "144:72:0",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
         "scope": 13,
-        "src": "66:202:0"
+        "src": "66:201:0"
       }
     ],
-    "src": "32:236:0"
+    "src": "32:235:0"
   },
   "legacyAST": {
     "attributes": {
       "absolutePath": "project:/contracts/AshokaCoin.sol",
       "exportedSymbols": {
-        "AshokaToken": [
+        "AshokaCoin": [
           12
         ]
       }
@@ -224,7 +224,7 @@
           "linearizedBaseContracts": [
             12
           ],
-          "name": "AshokaToken",
+          "name": "AshokaCoin",
           "scope": 13
         },
         "children": [
@@ -247,12 +247,12 @@
                 },
                 "id": 2,
                 "name": "ElementaryTypeName",
-                "src": "94:7:0"
+                "src": "93:7:0"
               }
             ],
             "id": 3,
             "name": "VariableDeclaration",
-            "src": "94:26:0"
+            "src": "93:26:0"
           },
           {
             "attributes": {
@@ -279,7 +279,7 @@
                 "children": [],
                 "id": 4,
                 "name": "ParameterList",
-                "src": "156:2:0"
+                "src": "155:2:0"
               },
               {
                 "attributes": {
@@ -290,7 +290,7 @@
                 "children": [],
                 "id": 5,
                 "name": "ParameterList",
-                "src": "166:0:0"
+                "src": "165:0:0"
               },
               {
                 "children": [
@@ -319,7 +319,7 @@
                             },
                             "id": 6,
                             "name": "Identifier",
-                            "src": "176:11:0"
+                            "src": "175:11:0"
                           },
                           {
                             "attributes": {
@@ -336,37 +336,37 @@
                             },
                             "id": 7,
                             "name": "Literal",
-                            "src": "190:7:0"
+                            "src": "189:7:0"
                           }
                         ],
                         "id": 8,
                         "name": "Assignment",
-                        "src": "176:21:0"
+                        "src": "175:21:0"
                       }
                     ],
                     "id": 9,
                     "name": "ExpressionStatement",
-                    "src": "176:21:0"
+                    "src": "175:21:0"
                   }
                 ],
                 "id": 10,
                 "name": "Block",
-                "src": "166:51:0"
+                "src": "165:51:0"
               }
             ],
             "id": 11,
             "name": "FunctionDefinition",
-            "src": "145:72:0"
+            "src": "144:72:0"
           }
         ],
         "id": 12,
         "name": "ContractDefinition",
-        "src": "66:202:0"
+        "src": "66:201:0"
       }
     ],
     "id": 13,
     "name": "SourceUnit",
-    "src": "32:236:0"
+    "src": "32:235:0"
   },
   "compiler": {
     "name": "solc",
@@ -376,12 +376,13 @@
     "5777": {
       "events": {},
       "links": {},
-      "address": "0x75F86321782F00189635e98fAb6De7e9329dEa06",
-      "transactionHash": "0xce3245230a314111af2f3a6110322c966030e60d8386131333af66905b255b09"
+      "address": "0x2Ac1EAf3e1eb47FE1CbC84aE8c35Cb941649061c",
+      "transactionHash": "0xbf1bf26efb23476326278a6cd5610a67da56264cb12d1b385890e7179983045e"
     }
   },
   "schemaVersion": "3.4.16",
-  "updatedAt": "2023-11-28T10:23:23.723Z",
+  "updatedAt": "2023-11-28T10:24:00.503Z",
+  "networkType": "ethereum",
   "devdoc": {
     "methods": {}
   },

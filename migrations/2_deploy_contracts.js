@@ -1,5 +1,5 @@
-var AshokaToken = artifacts.require("./AshokaToken.sol");
+var AshokaCoin = artifacts.require("./AshokaCoin.sol");
 
-module.exports = function(deployer) {
-  deployer.deploy(AshokaToken);
+module.exports = function (deployer) {
+  deployer.deploy(AshokaCoin);
 };

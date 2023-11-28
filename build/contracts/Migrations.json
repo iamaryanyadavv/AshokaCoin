@@ -74,7 +74,7 @@
   "sourceMap": "66:520:1:-;;;232:56;8:9:-1;5:2;;;30:1;27;20:12;5:2;232:56:1;271:10;263:5;;:18;;;;;;;;;;;;;;;;;;66:520;;;;;;",
   "deployedSourceMap": "66:520:1:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;66:520:1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;409:175;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;409:175:1;;;;;;;;;;;;;;;;;;;:::i;:::-;;118:36;;;:::i;:::-;;;;;;;;;;;;;;;;;;;92:20;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;294:109;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;294:109:1;;;;;;;;;;;;;;;;;:::i;:::-;;409:175;211:5;;;;;;;;;;;197:19;;:10;:19;;;193:26;;;475:19;508:11;475:45;;530:8;:21;;;552:24;;530:47;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;530:47:1;;;;8:9:-1;5:2;;;45:16;42:1;39;24:38;77:16;74:1;67:27;5:2;530:47:1;;;;218:1;193:26;409:175;:::o;118:36::-;;;;:::o;92:20::-;;;;;;;;;;;;;:::o;294:109::-;211:5;;;;;;;;;;;197:19;;:10;:19;;;193:26;;;387:9;360:24;:36;;;;193:26;294:109;:::o",
   "source": "// SPDX-License-Identifier: MIT\npragma solidity >=0.4.22 <0.9.0;\n\ncontract Migrations {\n    address public owner;\n    uint public last_completed_migration;\n\n    modifier restricted() {\n        if (msg.sender == owner) _;\n    }\n\n    constructor() public {\n        owner = msg.sender;\n    }\n\n    function setCompleted(uint completed) public restricted {\n        last_completed_migration = completed;\n    }\n\n    function upgrade(address new_address) public restricted {\n        Migrations upgraded = Migrations(new_address);\n        upgraded.setCompleted(last_completed_migration);\n    }\n}\n",
-  "sourcePath": "/Users/iamaryanyadav/College/Blockchain & Crypto/AshokaCoin/contracts/Migrations.sol",
+  "sourcePath": "/Users/admin/ashoka coin/AshokaCoin/contracts/Migrations.sol",
   "ast": {
     "absolutePath": "project:/contracts/Migrations.sol",
     "exportedSymbols": {
@@ -1475,12 +1475,12 @@
     "5777": {
       "events": {},
       "links": {},
-      "address": "0xd33BbD428306f75c4FeA4fbAbF5c0f36cFb7a4fc",
-      "transactionHash": "0x9c548744deb2c42e5bd59de9739884fd72d63b207db9eb4dc553173eb5e14866"
+      "address": "0x8960A08Bc5816387887D7f6640D7AF6645cFD02a",
+      "transactionHash": "0xe3c131ffaa4296cfd026873252dc49ff0f886cf41f717796896291ee3d0418dc"
     }
   },
   "schemaVersion": "3.4.16",
-  "updatedAt": "2023-11-28T10:17:48.416Z",
+  "updatedAt": "2023-11-28T10:24:00.505Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {}
