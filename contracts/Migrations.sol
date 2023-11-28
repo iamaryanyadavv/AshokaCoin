@@ -1,0 +1,27 @@
+pragma solidity ^0.8.19;
+
+interface MigrationsInterface {
+    function setCompleted(uint completed) external;
+}
+
+contract Migrations {
+    address public owner;
+    uint public last_completed_migration;
+
+    modifier restricted() {
+        if (msg.sender == owner) _;
+    }
+
+    constructor() {
+        owner = msg.sender;
+    }
+
+    function setCompleted(uint completed) public restricted {
+        last_completed_migration = completed;
+    }
+
+    function upgrade(address new_address) public restricted {
+        MigrationsInterface upgraded = MigrationsInterface(new_address);
+        upgraded.setCompleted(last_completed_migration);
+    }
+}
