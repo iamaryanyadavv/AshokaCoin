@@ -2,6 +2,7 @@ var AshokaCoinSale = artifacts.require("./AshokaCoinSale.sol");
 
 contract("AshokaCoinSale", function (accounts) {
   var tokenSaleInstance;
+  var tokenPrice = 1000000000000000; //wei
 
   it("initializes the contract with the correct values", function () {
     return AshokaCoinSale.deployed()
@@ -15,6 +16,10 @@ contract("AshokaCoinSale", function (accounts) {
       })
       .then(function (address) {
         assert.notEqual(address, 0x0, "has token contract address");
+        return tokenSaleInstance.tokenPrice();
+      })
+      .then(function (price) {
+        assert.equal(price, tokenPrice, "token price is correct");
       });
   });
 });
