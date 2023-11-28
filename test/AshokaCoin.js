@@ -124,5 +124,4 @@ contract("AshokaCoin", function (accounts) {
         });
     })
 
-
 });
