@@ -14,12 +14,14 @@ contract AshokaCoinSale {
         tokenContract = _tokenContract;
         tokenPrice = _tokenPrice;
     }
-      function multiply(uint x, uint y) internal pure returns (uint z) {
+    
+    function multiply(uint x, uint y) internal pure returns (uint z) {
         require(y == 0 || (z = x * y) / y == x);
     }
-    function buyTokens(uint _numberOfTokens) public payable{
 
-        require(msg.value == multiply(_numberOfTokens,tokenPrice));
+    function buyTokens(uint _numberOfTokens) public payable {
+
+        // require(msg.value == multiply(_numberOfTokens,tokenPrice));
         //require that there are enough token in contract
         //require that a transfer is succesful
         
