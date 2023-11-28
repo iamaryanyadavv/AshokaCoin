@@ -9,12 +9,19 @@ contract AshokaCoin {
     uint256 public totalSupply;
 
     event Transfer(
-        address _from,
-        address _to,
+        address indexed _from,
+        address indexed _to,
+        uint256 _value
+    );
+
+    event Approval(
+        address indexed _owner,
+        address indexed _spender,
         uint256 _value
     );
 
     mapping(address => uint256) public balanceOf;
+    mapping(address => mapping(address => uint256)) public allowance;
 
     //Constructor
     constructor(uint256 _initialSupply) public {
@@ -34,10 +41,42 @@ contract AshokaCoin {
 
         balanceOf[msg.sender] -= _value; //deducting from account
         balanceOf[_to] += _value; //adding to other's account
-        // return a boolean
         // transfer event
         emit Transfer(msg.sender, _to, _value);
 
+        return true;
+    }
+
+    // Approve
+    function approve(address _spender, uint256 _value) public returns (bool success){
+        // allownace
+        allowance[msg.sender][_spender] = _value;
+        
+        // approval event
+        emit Approval(msg.sender, _spender, _value);
+        
+        return true;
+    }
+
+    // Transfer From
+    function transferFrom(address _from, address _to, uint256 _value) public returns (bool success){
+        // Require _from has enough tokens
+        require(_value <= balanceOf[_from] );
+
+        // Require allownace is big enough 
+        require(_value <= allowance[_from][msg.sender]);
+
+        // Change the balance
+        balanceOf[_from] -= _value;
+        balanceOf[_to] += _value;
+
+        // Update the balance
+        allowance[_from][msg.sender] -= _value;
+
+        // Transfer event
+        emit Transfer(_from, _to, _value);
+        
+        // return a boolean
         return true;
     }
 
