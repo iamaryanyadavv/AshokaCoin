@@ -2,7 +2,18 @@ var AshokaCoin = artifacts.require("./AshokaCoin.sol");
 
 contract("AshokaCoin", function (accounts) {
   var tokenInstance;
-  it("sets the total supply upon deployment", function () {
+  it("Initializes the contract with the correct values", function () {
+    return AshokaCoin.deployed()
+      .then(function (instance) {
+        tokenInstance = instance;
+        return tokenInstance.name();
+      })
+      .then(function (name) {
+        assert.equal(name, "AshokaCoin", "has the correct name");
+      });
+  });
+
+  it("allocates the total supply upon deployment", function () {
     return AshokaCoin.deployed()
       .then(function (instance) {
         tokenInstance = instance;
