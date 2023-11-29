@@ -44,7 +44,9 @@ contract AshokaCoinSale {
         // // trasnfer remaining ashokacoin tokens to admin
         require(tokenContract.transfer(admin, tokenContract.balanceOf(address(this))));
 
-        // destroy contract
-        selfdestruct(payable(admin));
+        // UPDATE: Let's not destroy the contract here
+        // Just transfer the balance to the admin
+        address payable adrPayable = payable(admin);
+        adrPayable.transfer(address(this).balance);
     }
 }

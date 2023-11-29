@@ -134,10 +134,10 @@ contract("AshokaCoinSale", function (accounts) {
             })
             .then(function(balance){
                 assert.equal(balance.toNumber(), 999990, 'returns all unsold tokens to admin');
-                return tokenSaleInstance.tokenPrice();
+                return tokenInstance.balanceOf(tokenSaleInstance.address)
             })
-            .then(function(price){
-                assert.equal(price.toNumber(), 0, 'token price was reset');
+            .then(function(balance){
+                assert.equal(balance.toNumber(), 0, 'reset');
             });
     })
 });
