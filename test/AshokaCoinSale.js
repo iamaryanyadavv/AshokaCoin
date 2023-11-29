@@ -78,7 +78,15 @@ contract("AshokaCoinSale", function (accounts) {
               numberOfTokens,
               "increment the number of tokens sold"
             );
+            return tokenInstance.balanceOf(buyer);
+          })
+          .then(function (balance) {
+            assert.equal(balance.toNumber(), numberOfTokens);
 
+            return tokenInstance.balanceOf(tokenSaleInstance.address);
+          })
+          .then(function (balance) {
+            assert.equal(balance.toNumber(), tokenAvailable - numberOfTokens);
             return tokenSaleInstance.buyTokens(numberOfTokens, {
               from: buyer,
               value: 1,
@@ -97,10 +105,7 @@ contract("AshokaCoinSale", function (accounts) {
           })
           .then(assert.fail)
           .catch(function (error) {
-            assert(
-              error.message,
-              "msg.value must equal number of tokens in wei"
-            );
+            assert(error.message, "cannot purchase more tokens than available");
           });
       });
   });
