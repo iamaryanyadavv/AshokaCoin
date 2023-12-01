@@ -42,7 +42,7 @@ function App() {
                     <div className='container'>
                         <Router>
                             <Routes>
-                                <Route exact path="/" element={<BuyToken />} />
+                                <Route exact path="/" element={<BuyToken initData={walletInitRes}/>} />
                                 <Route exact path="/ashonkraffle" element={<Raffle />} />
                             </Routes>
                         </Router>

@@ -16,7 +16,7 @@ function Header() {
     return (
         <Navbar className="navbar" variant="static" shouldHideOnScroll={false}>
             <Navbar.Toggle color="inherit" showIn="sm" />
-            <Navbar.Brand hideIn="sm" css={{ '&:hover': { transform: 'scale(1.25)' } }}>
+            <Navbar.Brand hideIn="sm" css={{ '&:hover': { transform: 'scale(1)' } }}>
                 <Image css={{
                     width: '40px',
                     height: '40px',
@@ -30,7 +30,16 @@ function Header() {
                     onClick={() => {
                         window.location.pathname = ''
                     }} />
+                <Text css={{
+                    color: '#BE3144',
+                    fontWeight: '$bold',
+                    fontSize: '$xl',
+                    paddingLeft: '4px'
+                }}>
+                    AshokaCoin
+                </Text>
             </Navbar.Brand>
+
             <Navbar.Content hideIn="sm" variant="highlight-rounded">
                 {items.map((item, index) => {
                     return (
@@ -44,13 +53,25 @@ function Header() {
                 })}
 
             </Navbar.Content>
+
             <Navbar.Content showIn={'sm'}>
                 <Image css={{
                     width: '40px',
                     height: '40px'
                 }} src={Logo} />
             </Navbar.Content>
-            <Navbar.Content>
+
+            <Navbar.Content hideIn={'sm'}>
+                <Link target="_blank" href="https://bitcoin.org/en/">
+                    <Image css={{
+                        width: '40px',
+                        height: '40px',
+                        marginLeft: '107px'
+                    }} src={Bitcoin} />
+                </Link>
+            </Navbar.Content>
+
+            <Navbar.Content showIn={'sm'}>
                 <Link target="_blank" href="https://bitcoin.org/en/">
                     <Image css={{
                         width: '40px',
