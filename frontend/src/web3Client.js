@@ -11,7 +11,7 @@ export const init = async () => {
 
     if (typeof provider0 !== 'undefined') {
         // metamask is installed
-
+        console.log('connecting w Metamask')
         provider0
             .request({ method: 'eth_requestAccounts' })
             .then((accounts) => {
@@ -26,6 +26,10 @@ export const init = async () => {
             selectedAccount = accounts[0]
             console.log(`Selected account changed to ${selectedAccount}`)
         })
+    }
+    else{
+        console.log('Metamask not there dog')
+        return Promise.resolve(false)
     }
 
     const web3 = new Web3(provider0)
@@ -42,4 +46,8 @@ export const init = async () => {
     let tokenName = await AshokaCoin_Contract.name()
     console.log(tokenName)
 
+    let balance = await AshokaCoin_Contract.balanceOf(selectedAccount)
+    console.log(balance)
+
+    return selectedAccount
 }
