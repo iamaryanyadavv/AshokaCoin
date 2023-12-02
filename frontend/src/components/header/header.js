@@ -3,6 +3,7 @@ import "./header.css";
 import { Navbar, Link, Image, Popover, Text } from "@nextui-org/react";
 import Logo from '../../assets/logo.png'
 import Bitcoin from '../../assets/bitcoin.png'
+import Github from '../../assets/github.png'
 
 function Header() {
 
@@ -66,13 +67,19 @@ function Header() {
                     <Image css={{
                         width: '40px',
                         height: '40px',
-                        marginLeft: '107px'
+                        marginLeft: '43px'
                     }} src={Bitcoin} />
+                </Link>
+                <Link target="_blank" href="https://bitcoin.org/en/">
+                    <Image css={{
+                        width: '40px',
+                        height: '40px',
+                    }} src={Github} />
                 </Link>
             </Navbar.Content>
 
             <Navbar.Content showIn={'sm'}>
-                <Link target="_blank" href="https://bitcoin.org/en/">
+                <Link target="_blank" href="https://github.com/iamaryanyadavv/AshokaCoin/tree/main">
                     <Image css={{
                         width: '40px',
                         height: '40px'

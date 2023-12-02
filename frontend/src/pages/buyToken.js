@@ -1,26 +1,26 @@
 import React, { useEffect, useState } from "react";
+import './buyToken.css'
 import { Grid, Text, Loading, Col, Row, Input, Button } from "@nextui-org/react";
 import { HiArrowTrendingUp } from "react-icons/hi2";
 import { FaWallet } from "react-icons/fa";
-import { getUserACBalance, buyToken } from "../web3Client";
+import { buyToken } from "../web3Client";
 
 export default function BuyToken(props) {
-    const [AshokaCoin_Contract, setContract] = useState();
-    const [selectedAccount, setSelectedAccount] = useState();
+    const [userBalanceETH, setUserBalanceETH] = useState();
+    const [userBalanceASHONK, setUserBalanceASHONK] = useState();
+    const [selectedAccount, setSelectedAccount] = useState(null);
     const [word, setWord] = useState('Wherever');
-    const [no_of_tokens, setNo_Of_Tokens] = useState(0)
+    const [no_of_tokens, setNo_Of_Tokens] = useState('')
+    const [ETH_inputStatus, setETH_inputStatus] = useState('default')
 
     useEffect(() => {
         if (typeof props.initData !== 'undefined') {
-            setContract(props.initData[1]);
-            setSelectedAccount(props.initData[0]);
+            setSelectedAccount(props.initData[0])
+            setUserBalanceETH(props.initData[1])
+            console.log('userBalanceASHONK: ', props.initData[2])
+            setUserBalanceASHONK(props.initData[2])
         }
-    }, [props.initData]);
-
-    const invokeUserACBalance = async () => {
-        let userWalletData = await getUserACBalance()
-        console.log(userWalletData)
-    }
+    }, [props.initData])
 
     const invokeBuyToken = async (no_of_tokens) => {
         let balance = await buyToken(no_of_tokens)
@@ -41,8 +41,29 @@ export default function BuyToken(props) {
 
     return (
         <>
-            {typeof props.initData === 'undefined' ? (
-                <Loading size="md" color="error" />
+            {(typeof props.initData === 'undefined' && selectedAccount === null) ? (
+                <Grid.Container css={{
+                    jc: 'center',
+                    alignItems: 'center',
+                    width: '100vw',
+                    height: '80vh'
+                }}>
+                    <Col css={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center'
+                    }}>
+                        <Loading size="md" color="error" />
+                        <Text css={{
+                            fontSize: '$2xl',
+                            fontWeight: '$semibold',
+                            color: '#BE3144',
+                            marginTop: '12px'
+                        }}>
+                            Getting your balance from your connected wallet
+                        </Text>
+                    </Col>
+                </Grid.Container>
             ) : (
                 <Grid.Container css={{
                     width: '100vw',
@@ -105,7 +126,7 @@ export default function BuyToken(props) {
                                     paddingLeft: '8px',
                                     fontSize: '$sm'
                                 }}>
-                                    1 ASHONK = 0.0001 ETH
+                                    1 ASHONK = 0.001 ETH
                                 </Text>
                             </Row>
 
@@ -124,7 +145,14 @@ export default function BuyToken(props) {
                                         css={{
                                             minWidth: '300px'
                                         }}
-                                        onChange={(event)=>{
+                                        status={ETH_inputStatus}
+                                        onChange={(event) => {
+                                            if(event.target.value < userBalanceETH){
+                                                setETH_inputStatus('default')
+                                            }
+                                            else{
+                                                setETH_inputStatus('error')
+                                            }
                                             setNo_Of_Tokens(event.target.value)
                                         }}
                                     />
@@ -149,16 +177,13 @@ export default function BuyToken(props) {
                                         <Text css={{
                                             fontWeight: '$semibold',
                                         }}>
-                                            0.
-                                            <span style={{ fontSize: '0.75rem' }}>
-                                                00
-                                            </span>
+                                            {userBalanceETH}
                                         </Text>
                                         <FaWallet color="#fff" size={'16px'} style={{ margin: '0px 8px' }} />
                                     </Row>
 
                                 </Col>
-                                
+
                                 <Text css={{
                                     padding: '12px 0px 0px 0px',
                                     fontWeight: '$semibold',
@@ -166,6 +191,7 @@ export default function BuyToken(props) {
                                 }}>
                                     You will receive...
                                 </Text>
+
                                 <Row css={{
                                     padding: '0px 0px 12px 0px'
                                 }}>
@@ -174,7 +200,7 @@ export default function BuyToken(props) {
                                         disabled
                                         underlined
                                         labelLeft="ASHONK"
-                                        placeholder="0.00" //dynamically update based on the amount of ETH they have entered
+                                        placeholder={no_of_tokens === '' ? '0.00' : no_of_tokens*1000} //dynamically update based on the amount of ETH they have entered
                                         css={{
                                             minWidth: '300px'
                                         }}
@@ -200,10 +226,8 @@ export default function BuyToken(props) {
                                         <Text css={{
                                             fontWeight: '$semibold',
                                         }}>
-                                            0.
-                                            <span style={{ fontSize: '0.75rem' }}>
-                                                00
-                                            </span>
+                                            {/* {console.log('ba;ance her: ', String(userBalanceASHONK))} */}
+                                            {String(userBalanceASHONK)}
                                         </Text>
                                         <FaWallet color="#fff" size={'16px'} style={{ margin: '0px 8px' }} />
                                     </Row>
@@ -211,14 +235,26 @@ export default function BuyToken(props) {
                                 </Col>
                             </Col>
 
-                            <Button flat color={'error'} css={{
-                                marginTop: '16px'
-                            }}
-                            onClick={()=>{
-                                invokeBuyToken(no_of_tokens)
-                            }}>
-                                Buy
-                            </Button>
+                            {(no_of_tokens === '' || ETH_inputStatus==='error' || (no_of_tokens*1000)==='0')  ?
+                                <Button flat color={'error'} css={{
+                                    marginTop: '24px'
+                                }}
+                                disabled>
+                                    Buy
+                                </Button>
+                                :
+                                <Button flat color={'error'} css={{
+                                    marginTop: '24px',
+                                    background: 'rgba(240, 89, 65, 0.25)',
+                                    color: 'rgba(240, 89, 65, 1)'
+                                }}
+                                    onClick={() => {
+                                        invokeBuyToken(no_of_tokens)
+                                    }}>
+                                    Buy
+                                </Button>
+                            }
+
 
                         </Col>
                     </Grid>
