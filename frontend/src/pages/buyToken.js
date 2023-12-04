@@ -102,7 +102,7 @@ export default function BuyToken(props) {
                                 onClick={() => {
                                     setShowFaucetModal(true)
                                 }}>
-                                Get More ETH
+                                ETH Faucet
                             </Button>
                             :
                             <Row css={{
@@ -113,7 +113,7 @@ export default function BuyToken(props) {
                                     margin: '8px 8px 48px 0px'
                                 }}
                                     disabled>
-                                    Get More ETH
+                                    ETH Faucet
                                 </Button>
                                 <Tooltip
                                     content="You already have some ETH in your account to be able to exchange for some ASHONK"
