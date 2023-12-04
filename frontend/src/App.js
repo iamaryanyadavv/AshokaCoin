@@ -24,20 +24,22 @@ function App() {
         },2000)
     },[])
 
-    window.ethereum.on('accountsChanged', function (accounts) {
-        console.log(`Selected account changed to ${accounts[0]}`)
-        if(typeof accounts[0]==='undefined'){
-            setWalletInitRes(false)
-        }
-        else{
-            const fetchWalletData = async () => {
-                let initRes 
-                initRes = await init()//initialising web3client
-                setWalletInitRes(initRes)
+    if(window.ethereum){
+        window.ethereum.on('accountsChanged', function (accounts) {
+            console.log(`Selected account changed to ${accounts[0]}`)
+            if(typeof accounts[0]==='undefined'){
+                setWalletInitRes(false)
             }
-            fetchWalletData()
-        }
-    })
+            else{
+                const fetchWalletData = async () => {
+                    let initRes 
+                    initRes = await init()//initialising web3client
+                    setWalletInitRes(initRes)
+                }
+                fetchWalletData()
+            }
+        })
+    }
 
     const theme = createTheme({
         type: 'dark',
