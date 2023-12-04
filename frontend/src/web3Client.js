@@ -28,6 +28,9 @@ export const init = async () => {
         window.ethereum.on('accountsChanged', function (accounts) {
             selectedAccount = accounts[0]
             console.log(`Selected account changed to ${selectedAccount}`)
+            if(typeof selectedAccount==='undefined'){
+                return Promise.resolve(false)
+            }
         })
 
     }

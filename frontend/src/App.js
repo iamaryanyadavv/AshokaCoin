@@ -4,9 +4,11 @@ import { init } from './web3Client';
 import { createTheme, NextUIProvider } from '@nextui-org/react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/header/header';
+import Footer from './components/footer/footer';
 import BuyToken from './pages/buyToken';
 import Raffle from './pages/raffle';
 import ConnectWallet from './pages/connectWallet';
+import { FaAlgolia, FaLeaf } from 'react-icons/fa';
 
 function App() {
     const [walletInitRes, setWalletInitRes] = useState()
@@ -17,8 +19,25 @@ function App() {
             initRes = await init()//initialising web3client
             setWalletInitRes(initRes)
         }
-        fetchWalletData()
+        const test = window.setTimeout(()=>{
+            fetchWalletData()
+        },2000)
     },[])
+
+    window.ethereum.on('accountsChanged', function (accounts) {
+        console.log(`Selected account changed to ${accounts[0]}`)
+        if(typeof accounts[0]==='undefined'){
+            setWalletInitRes(false)
+        }
+        else{
+            const fetchWalletData = async () => {
+                let initRes 
+                initRes = await init()//initialising web3client
+                setWalletInitRes(initRes)
+            }
+            fetchWalletData()
+        }
+    })
 
     const theme = createTheme({
         type: 'dark',
@@ -34,7 +53,7 @@ function App() {
         <NextUIProvider theme={theme}>
             {walletInitRes === false ?
                 <>
-                    <ConnectWallet/>
+                    <ConnectWallet/>3
                 </>
                 :
                 <>
@@ -47,6 +66,7 @@ function App() {
                             </Routes>
                         </Router>
                     </div>
+                    <Footer />
                 </>
             }
         </NextUIProvider>

@@ -70,7 +70,7 @@ function Header() {
                         marginLeft: '43px'
                     }} src={Bitcoin} />
                 </Link>
-                <Link target="_blank" href="https://bitcoin.org/en/">
+                <Link target="_blank" href="https://github.com/iamaryanyadavv/AshokaCoin/tree/main">
                     <Image css={{
                         width: '40px',
                         height: '40px',
@@ -83,7 +83,7 @@ function Header() {
                     <Image css={{
                         width: '40px',
                         height: '40px'
-                    }} src={Bitcoin} />
+                    }} src={Github} />
                 </Link>
             </Navbar.Content>
 
