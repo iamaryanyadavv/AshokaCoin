@@ -65,13 +65,13 @@ function Footer(){
                     textAlign: 'center',
                     padding: '4px 0px',
                     borderStyle: 'solid',
-                    borderColor: '#872341',
+                    borderColor: 'rgba(135, 35, 65, 0.5)',
                     borderWidth: '2px 0px 0px 0px',
                     '@xsMax':{
                         fontSize: '$xs'
                     }
                 }}>
-                    © 2023 AshokaCoin "ASHONK". All Rights Reserved.
+                    © 2023 AshokaCoin. All Rights Reserved
                 </Text>
             </Col>
         </Container>

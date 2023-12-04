@@ -28,7 +28,7 @@ export const init = async () => {
         window.ethereum.on('accountsChanged', function (accounts) {
             selectedAccount = accounts[0]
             console.log(`Selected account changed to ${selectedAccount}`)
-            if(typeof selectedAccount==='undefined'){
+            if (typeof selectedAccount === 'undefined') {
                 return Promise.resolve(false)
             }
         })
@@ -82,33 +82,64 @@ export const init = async () => {
 }
 
 
+// export const buyToken = async (no_of_tokens) => {
+
+//     // let bal1 = await Promise.resolve(AshokaCoin_Contract.methods.balanceOf(AshokaCoinSale_Address).call())
+//     // let bal2 = await Promise.resolve(AshokaCoin_Contract.methods.balanceOf(selectedAccount).call())
+//     // console.log('sale AC balance before', bal1)
+//     // console.log('my AC balance before', bal2)
+
+//     const web3 = new Web3(window.ethereum)
+
+//     const tokensToBuy = web3.utils.toBigInt(parseFloat(no_of_tokens)); // Convert to BigNumber
+//     console.log('tokenstobuy: ', tokensToBuy)
+//     const tokenPrice = await AshokaCoinSale_Contract.methods.tokenPrice().call();
+//     console.log('token price: ', tokenPrice)
+//     const tokenPriceBN = web3.utils.toBigInt(tokenPrice)
+//     const priceInWei = tokenPriceBN * tokensToBuy
+
+//     AshokaCoinSale_Contract.methods.buyTokens(tokensToBuy.toString()).send({
+//         from: selectedAccount,
+//         value: priceInWei.toString(),
+//         gas: 500000
+//     }).then((receipt)=>{
+//         console.log('receipt: ',receipt)
+//         console.log('receipt typeof: ', typeof receipt)
+//         return receipt
+//     }).catch((error)=>{
+//         console.log(error)
+//         return 'failed'
+//     })
+
+//     // let bal3 = await Promise.resolve(AshokaCoin_Contract.methods.balanceOf(AshokaCoinSale_Address).call())
+//     // let bal4 = await Promise.resolve(AshokaCoin_Contract.methods.balanceOf(selectedAccount).call())
+//     // console.log('sale AC balance after', bal3)
+//     // console.log('my AC balance after', bal4)
+// }
+
 export const buyToken = async (no_of_tokens) => {
-    // console.log(AshokaCoinSale_Address)
-    // let bal1 = await Promise.resolve(AshokaCoin_Contract.methods.balanceOf(AshokaCoinSale_Address).call())
-    // let bal2 = await Promise.resolve(AshokaCoin_Contract.methods.balanceOf(AshokaCoin_Address).call())
-    // console.log('ashokacoinsale contract address BALANCE', bal1)
-    // console.log('ashokacoin contract address BALANCE', bal2)
+    try {
+        const web3 = new Web3(window.ethereum);
 
-    const web3 = new Web3(window.ethereum)
+        const tokensToBuy = web3.utils.toBigInt(parseFloat(no_of_tokens)); // Convert to BigNumber
+        console.log('tokenstobuy: ', tokensToBuy)
 
-    const tokensToBuy = web3.utils.toBigInt(parseInt(no_of_tokens)); // Convert to BigNumber
-    const tokenPrice = await AshokaCoinSale_Contract.methods.tokenPrice().call();
-    const tokenPriceBN = web3.utils.toBigInt(tokenPrice)
-    const priceInWei = tokenPriceBN*tokensToBuy
+        const tokenPrice = await AshokaCoinSale_Contract.methods.tokenPrice().call();
+        console.log('token price: ', tokenPrice)
+        const tokenPriceBN = web3.utils.toBigInt(tokenPrice)
+        
+        const priceInWei = tokenPriceBN * tokensToBuy
 
-    AshokaCoinSale_Contract.methods.buyTokens(tokensToBuy.toString(), {
-        from: selectedAccount,
-        value: priceInWei.toString(), // Ensure it's passed as a string
-        gas: 500000 // Gas limit
-    })
+        // Return the Promise from the send method
+        return AshokaCoinSale_Contract.methods.buyTokens(tokensToBuy.toString()).send({
+            from: selectedAccount,
+            value: priceInWei.toString(),
+            gas: 500000
+        });
 
-    window.addEventListener('')
-
-
-    let bal3 = await Promise.resolve(AshokaCoin_Contract.methods.balanceOf(AshokaCoinSale_Address).call())
-    let bal4 = await Promise.resolve(AshokaCoin_Contract.methods.balanceOf(selectedAccount).call())
-    console.log('sale balance', bal3)
-    console.log('my balance', bal4)
-
-    return Promise.resolve(AshokaCoin_Contract.methods.balanceOf(selectedAccount).call())
+    } catch (error) {
+        console.error('Error in buyToken: ', error);
+        // Re-throw the error to be handled by the caller
+        return 'failed'
+    }
 }

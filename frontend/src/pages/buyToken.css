@@ -2,3 +2,7 @@
     background: #000 !important;
     color: #fff !important;
 } */
+
+.ex-box{
+    backdrop-filter: blur(16px);
+}
