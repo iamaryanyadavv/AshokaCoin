@@ -6,3 +6,7 @@
 .ex-box{
     backdrop-filter: blur(16px);
 }
+
+::placeholder{
+    color: white;
+}

@@ -19,6 +19,7 @@ export default function BuyToken(props) {
     const [showFaucetModal, setShowFaucetModal] = useState(false)
     const [enableFaucetBTN, setEnableFaucetBTN] = useState(false)
     const [tx_processing, setTx_processing] = useState(false)
+    const [faucet_tx_processing, setFaucet_tx_processing] = useState(false)
 
     useEffect(() => {
         if (typeof props.initData !== 'undefined') {
@@ -54,7 +55,6 @@ export default function BuyToken(props) {
                     progress: undefined,
                     theme: "colored",
                 });
-                setTimeout(() => window.location.reload(), 10000);
             }
             else {
                 console.log('errorrrr dogggg')
@@ -68,7 +68,6 @@ export default function BuyToken(props) {
                     progress: undefined,
                     theme: "colored",
                 });
-                setTimeout(() => window.location.reload(), 10000);
             }
         } catch (error) {
             console.error('Error in transaction: ', error);
@@ -82,10 +81,10 @@ export default function BuyToken(props) {
                 progress: undefined,
                 theme: "colored",
             });
-            setTimeout(() => window.location.reload(), 10000);
         } finally {
             setTx_processing(false);
             setNo_Of_Tokens(0)
+            props.onActionComplete()
         }
     }
 
@@ -101,14 +100,49 @@ export default function BuyToken(props) {
             const data = await response.json();
             if (data.success) {
                 console.log('Transaction Hash:', data.transactionHash);
+                setShowFaucetModal(false)
+                toast.success(`Transaction Successful! Transaction Hash: ${data.transactionHash}`, {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: false,
+                    pauseOnHover: true,
+                    draggable: false,
+                    progress: undefined,
+                    theme: "colored",
+                });
             } else {
                 console.error('Error:', data.error);
+                setShowFaucetModal(false)
+                toast.error(`Transaction Failed! Please try again.`, {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: false,
+                    pauseOnHover: true,
+                    draggable: false,
+                    progress: undefined,
+                    theme: "colored",
+                });
             }
         } catch (error) {
             console.error('Error:', error);
+            toast.error(`Transaction Failed! Error: ${error}.`, {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true,
+                draggable: false,
+                progress: undefined,
+                theme: "colored",
+            });
+        } finally {
+            setFaucet_tx_processing(false)
+            props.onActionComplete()
         }
     };
-    
+
 
     useEffect(() => {
         const wordArray = [' Wherever', ' Whoever', ' Whenever']
@@ -170,7 +204,8 @@ export default function BuyToken(props) {
                         }}>
                             {selectedAccount}
                         </Text>
-                        {userBalanceETH == 0 ?
+                        {console.log(Math.floor(userBalanceETH*1000))}
+                        {!Number.isInteger(Math.floor(userBalanceETH*1000)) || Math.floor(userBalanceETH*1000)==0 ?
                             <Button flat color={'error'} css={{
                                 background: 'rgba(240, 89, 65, 0.25)',
                                 color: 'rgba(240, 89, 65, 1)',
@@ -254,24 +289,46 @@ export default function BuyToken(props) {
                                         )
                                     }}
                                 />
-                                {enableFaucetBTN == false ?
-                                    <Button flat color={'error'} css={{
-                                        marginTop: '12px'
-                                    }}
-                                        disabled>
-                                        Get 0.01 ETH
-                                    </Button>
-                                    :
+                                {!faucet_tx_processing &&
+                                    <>
+                                        {enableFaucetBTN == false ?
+                                            <Button flat color={'error'} css={{
+                                                marginTop: '12px'
+                                            }}
+                                                disabled>
+                                                Get 0.01 ETH
+                                            </Button>
+                                            :
+                                            <Button flat color={'error'} css={{
+                                                marginTop: '12px',
+                                                background: 'rgba(240, 89, 65, 0.25)',
+                                                color: 'rgba(240, 89, 65, 1)'
+                                            }}
+                                                onClick={() => {
+                                                    // transfer some eth from one of our accounts to this account
+                                                    setFaucet_tx_processing(true)
+                                                    sendEthFromFaucet(selectedAccount, 0.01)
+                                                }}>
+                                                Get 0.01 ETH
+                                            </Button>
+                                        }
+
+                                    </>
+                                }
+                                {faucet_tx_processing && 
                                     <Button flat color={'error'} css={{
                                         marginTop: '12px',
-                                        background: 'rgba(240, 89, 65, 0.25)',
-                                        color: 'rgba(240, 89, 65, 1)'
-                                    }}
-                                        onClick={() => {
-                                            // transfer some eth from one of our accounts to this account
-                                            sendEthFromFaucet(selectedAccount, 0.01)
+                                        background: 'rgba(240, 89, 65, 0.1)',
+                                    }}>
+                                        <Text css={{
+                                            color: 'rgba(240, 89, 65, 1)',
+                                            fontWeight: '$medium',
+                                            paddingRight: '8px',
+                                            fontSize: '$sm'
                                         }}>
-                                        Get 0.01 ETH
+                                            Transaction Processing...
+                                        </Text>
+                                        <Loading color={'error'} size="sm" />
                                     </Button>
                                 }
                             </Modal.Body>
@@ -357,6 +414,7 @@ export default function BuyToken(props) {
                                                 padding: '0px 0px',
                                             }}>
                                                 <Input
+                                                    value={no_of_tokens}
                                                     aria-label='eth input'
                                                     underlined
                                                     labelLeft="ETH"
@@ -366,14 +424,14 @@ export default function BuyToken(props) {
                                                     }}
                                                     status={ETH_inputStatus}
                                                     onChange={(event) => {
-                                                        
-                                                        if (event.target.value < userBalanceETH && Number.isInteger(Number(event.target.value)*1000) && (Number(event.target.value)*1000)!=0){
+
+                                                        if (event.target.value < userBalanceETH && Number.isInteger(Number(event.target.value) * 1000) && (Number(event.target.value) * 1000) != 0) {
                                                             setETH_inputStatus('default')
                                                         }
                                                         else {
                                                             setETH_inputStatus('error')
                                                         }
-                                                        if(event.target.value==''){
+                                                        if (event.target.value == '') {
                                                             setETH_inputStatus('defualt')
                                                         }
                                                         setNo_Of_Tokens(event.target.value)
@@ -430,6 +488,7 @@ export default function BuyToken(props) {
                                                     underlined
                                                     labelLeft="ASHONK"
                                                     placeholder={no_of_tokens === '' ? '0.00' : no_of_tokens * 1000} //dynamically update based on the amount of ETH they have entered
+                                                    style={{}}
                                                     css={{
                                                         minWidth: '300px'
                                                     }}
@@ -463,6 +522,7 @@ export default function BuyToken(props) {
                                             </Col>
                                         </Grid>
                                     </Col>
+
                                     {!tx_processing &&
                                         <>
                                             {(no_of_tokens === '' || ETH_inputStatus === 'error' || (no_of_tokens * 1000) === '0') ?
@@ -529,7 +589,7 @@ export default function BuyToken(props) {
                                         color: '#F05941',
                                         lineHeight: '0.75'
                                     }}>
-                                        $XX.X m
+                                        $1 M
                                     </Text>
                                     <Text css={{
                                         fontSize: '$sm',
@@ -553,7 +613,7 @@ export default function BuyToken(props) {
                                         color: '#F05941',
                                         lineHeight: '0.75'
                                     }}>
-                                        $XX.X
+                                        $2.21
                                     </Text>
                                     <Text css={{
                                         fontSize: '$sm',
@@ -577,7 +637,7 @@ export default function BuyToken(props) {
                                         color: '#F05941',
                                         lineHeight: '0.75'
                                     }}>
-                                        $XX.X m
+                                        $750 K
                                     </Text>
                                     <Text css={{
                                         fontSize: '$sm',

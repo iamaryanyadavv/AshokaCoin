@@ -12,6 +12,11 @@ import { FaAlgolia, FaLeaf } from 'react-icons/fa';
 
 function App() {
     const [walletInitRes, setWalletInitRes] = useState()
+    const [refreshTrigger, setRefreshTrigger] = useState(false)
+
+    const onTxComplete = () => {
+        setRefreshTrigger(prev => !prev); // Toggle to trigger useEffect
+    };
 
     useEffect(() => {
         const fetchWalletData = async () => {
@@ -21,8 +26,8 @@ function App() {
         }
         const test = window.setTimeout(()=>{
             fetchWalletData()
-        },2000)
-    },[])
+        },1000)
+    },[refreshTrigger])
 
     if(window.ethereum){
         window.ethereum.on('accountsChanged', function (accounts) {
@@ -63,7 +68,7 @@ function App() {
                     <div className='container'>
                         <Router>
                             <Routes>
-                                <Route exact path="/" element={<BuyToken initData={walletInitRes}/>} />
+                                <Route exact path="/" element={<BuyToken initData={walletInitRes} onActionComplete={onTxComplete}/>} />
                                 <Route exact path="/ashonkraffle" element={<Raffle />} />
                             </Routes>
                         </Router>

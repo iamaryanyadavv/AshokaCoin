@@ -72,6 +72,8 @@ export const init = async () => {
 
     let userBalanceASHONK = await Promise.resolve(AshokaCoin_Contract.methods.balanceOf(selectedAccount).call())
 
+    // console.log(Promise.resolve(AshokaCoin_Contract.methods))
+
     // let tokenName = await AshokaCoin_Contract.name()
     // console.log(tokenName)
 
@@ -127,7 +129,7 @@ export const buyToken = async (no_of_tokens) => {
         const tokenPrice = await AshokaCoinSale_Contract.methods.tokenPrice().call();
         console.log('token price: ', tokenPrice)
         const tokenPriceBN = web3.utils.toBigInt(tokenPrice)
-        
+
         const priceInWei = tokenPriceBN * tokensToBuy
 
         // Return the Promise from the send method
