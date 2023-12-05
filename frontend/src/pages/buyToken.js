@@ -7,7 +7,6 @@ import { buyToken } from "../web3Client";
 import { BsFillQuestionDiamondFill } from "react-icons/bs";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Web3 from 'web3';
 
 export default function BuyToken(props) {
     const [userBalanceETH, setUserBalanceETH] = useState();
@@ -201,10 +200,15 @@ export default function BuyToken(props) {
                             fontWeight: '$semibold',
                             fontSize: '$xl',
                             color: '#F05941',
+                            '@smMax':{
+                                width: '300px',
+                                whiteSpace: 'nowrap',
+                                textOverflow: 'ellipsis',
+                                overflow: 'hidden'
+                            }
                         }}>
                             {selectedAccount}
                         </Text>
-                        {console.log(Math.floor(userBalanceETH*1000))}
                         {!Number.isInteger(Math.floor(userBalanceETH*1000)) || Math.floor(userBalanceETH*1000)==0 ?
                             <Button flat color={'error'} css={{
                                 background: 'rgba(240, 89, 65, 0.25)',
@@ -344,7 +348,8 @@ export default function BuyToken(props) {
                             {/* Left Side Text */}
                             <Grid css={{
                                 maxW: '500px',
-                                minWidth: '300px'
+                                minWidth: '300px',
+                                padding: '8px'
                             }}>
                                 <Text css={{
                                     fontSize: '$3xl',
@@ -370,7 +375,8 @@ export default function BuyToken(props) {
                             {/* Right Side Text */}
                             <Grid css={{
                                 maxW: '500px',
-                                minWidth: '300px'
+                                minWidth: '300px',
+                                padding: '8px'
                             }}>
 
                                 <Col css={{
@@ -601,7 +607,7 @@ export default function BuyToken(props) {
                                 </Col>
                             </Grid>
 
-                            <Grid>
+                            <Grid >
                                 <Col css={{
                                     display: 'flex',
                                     flexDirection: 'column',

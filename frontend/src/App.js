@@ -7,6 +7,7 @@ import Header from './components/header/header';
 import Footer from './components/footer/footer';
 import BuyToken from './pages/buyToken';
 import Raffle from './pages/raffle';
+import Holders from './pages/holders'
 import ConnectWallet from './pages/connectWallet';
 import { FaAlgolia, FaLeaf } from 'react-icons/fa';
 
@@ -69,7 +70,8 @@ function App() {
                         <Router>
                             <Routes>
                                 <Route exact path="/" element={<BuyToken initData={walletInitRes} onActionComplete={onTxComplete}/>} />
-                                <Route exact path="/ashonkraffle" element={<Raffle />} />
+                                <Route exact path="/raffle" element={<Raffle initData={walletInitRes} />} />
+                                <Route exact path="/holders" element={<Holders initData={walletInitRes} />} />
                             </Routes>
                         </Router>
                     </div>

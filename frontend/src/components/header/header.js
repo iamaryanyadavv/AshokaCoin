@@ -9,7 +9,8 @@ function Header() {
 
     const items = [
         { name: 'Ashonk', href: '/' },
-        { name: 'Raffle', href: '/ashonkraffle' },
+        { name: 'Raffle', href: '/raffle' },
+        { name: 'Holders', href: '/holders' },
     ]
 
     var active = window.location.pathname
