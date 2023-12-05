@@ -11,6 +11,8 @@ and management of an Initial Coin Offering (ICO) on the Ethereum network by the 
 4. Node v18.13.0
 5. Web3.js v1.10.0
 6. ReactJS v18.2.0
+7. ExpressJS v4.18.2
+8. Nodemon v3.0.2
 
 ## Smart Contracts
 We essentially code up two contracts, an ERC20 token contract, and a sale contract, which
