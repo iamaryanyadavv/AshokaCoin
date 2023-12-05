@@ -18,6 +18,11 @@ export default function Holders(props) {
     const pieChartOptions = {
         responsive: true,
         maintainAspectRatio: true,
+        plugins: {
+            legend: {
+              display: false,
+            },
+          },
         // You can add more options here
     };
 
@@ -52,9 +57,9 @@ export default function Holders(props) {
             setUserBalanceETH(props.initData[1] == '0.' ? 0 : props.initData[1])
             setUserBalanceASHONK(props.initData[2])
         }
-        window.setTimeout(()=>{
+        window.setTimeout(() => {
             getTransactions('0x4FbD1Ed20eB4B997Fc8cac477c7E15Cb326554dE')
-        },3000)
+        }, 1000)
     }, [props.initData])
 
     async function getTransactions(address) {
@@ -120,15 +125,16 @@ export default function Holders(props) {
     return (
         <Grid.Container css={{
             jc: 'center',
-            alignItems: 'center',
-            display: 'flex',
-            flexDirection: 'column'
+            alignItems: 'start',
+            height: '80vh'
         }}>
             <Text css={{
                 fontSize: '$2xl',
                 fontWeight: '$semibold',
                 color: '#BE3144',
-                padding: '24px 0px'
+                padding: '24px 0px',
+                width: '100vw',
+                textAlign: 'center'
             }}>
                 All ASHONK Holders
             </Text>
@@ -149,7 +155,8 @@ export default function Holders(props) {
                             jc: 'center',
                             alignItems: 'center',
                             display: 'flex',
-                            flexDirection: 'column'
+                            flexDirection: 'column',
+                            padding: '24px 36px',
                         }}>
                             <Text css={{
                                 fontSize: '$lg',
@@ -169,8 +176,7 @@ export default function Holders(props) {
                             alignItems: 'center',
                             display: 'flex',
                             flexDirection: 'column',
-                            paddingTop: '24px',
-                            paddingBottom: '48px'
+                            padding: '24px 36px'
                         }}>
                             <Text css={{
                                 fontSize: '$lg',
@@ -194,12 +200,29 @@ export default function Holders(props) {
                                 </Table.Header>
                                 <Table.Body>
                                     {holdersArray.map((account, index) => {
-                                        if (index < 20) { // Assuming you want to display the top 10
+                                        if (index < 5) { // Assuming you want to display the top 10
                                             return (
                                                 <Table.Row key={account[0]}>
-                                                    <Table.Cell css={{ textAlign: 'center' }}>{index + 1}</Table.Cell>
-                                                    <Table.Cell css={{ textAlign: 'center' }}>{account[0]}</Table.Cell>
-                                                    <Table.Cell css={{ textAlign: 'center' }}>{account[1].toFixed(2)}</Table.Cell>
+                                                    <Table.Cell css={{ textAlign: 'center', }}>
+                                                        <Text>
+                                                            {index + 1}
+                                                        </Text>
+                                                    </Table.Cell>
+                                                    <Table.Cell css={{ textAlign: 'center', }}>
+                                                        <Text css={{
+                                                            width: '200px',
+                                                            whiteSpace: 'nowrap',
+                                                            textOverflow: 'ellipsis',
+                                                            overflow: 'hidden'
+                                                        }}>
+                                                            {account[0]}
+                                                        </Text>
+                                                    </Table.Cell>
+                                                    <Table.Cell css={{ textAlign: 'center' }}>
+                                                        <Text>
+                                                            {account[1].toFixed(0)}
+                                                        </Text>
+                                                    </Table.Cell>
                                                 </Table.Row>
                                             );
                                         }

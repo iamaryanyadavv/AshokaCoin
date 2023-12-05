@@ -31,12 +31,6 @@ export default function BuyToken(props) {
     }, [props.initData])
 
     const invokeBuyToken = async (no_of_tokens) => {
-        // setTx_processing(true)
-        // var res = await buyToken(no_of_tokens * 1000)
-        // console.log('tx_res: ', res)
-        // console.log('tx_res typeof: ', typeof res)
-        // setTx_processing(false)
-        // setTx_res(res)
         try {
             setTx_processing(true);
             const res = await buyToken(no_of_tokens * 1000);
@@ -52,7 +46,7 @@ export default function BuyToken(props) {
                     pauseOnHover: true,
                     draggable: false,
                     progress: undefined,
-                    theme: "colored",
+                    theme: "dark",
                 });
             }
             else {
@@ -65,7 +59,7 @@ export default function BuyToken(props) {
                     pauseOnHover: true,
                     draggable: false,
                     progress: undefined,
-                    theme: "colored",
+                    theme: "dark",
                 });
             }
         } catch (error) {
@@ -78,11 +72,11 @@ export default function BuyToken(props) {
                 pauseOnHover: true,
                 draggable: false,
                 progress: undefined,
-                theme: "colored",
+                theme: "dark",
             });
         } finally {
             setTx_processing(false);
-            setNo_Of_Tokens(0)
+            setNo_Of_Tokens('0')
             props.onActionComplete()
         }
     }
@@ -108,7 +102,7 @@ export default function BuyToken(props) {
                     pauseOnHover: true,
                     draggable: false,
                     progress: undefined,
-                    theme: "colored",
+                    theme: "dark",
                 });
             } else {
                 console.error('Error:', data.error);
@@ -121,7 +115,7 @@ export default function BuyToken(props) {
                     pauseOnHover: true,
                     draggable: false,
                     progress: undefined,
-                    theme: "colored",
+                    theme: "dark",
                 });
             }
         } catch (error) {
@@ -134,10 +128,11 @@ export default function BuyToken(props) {
                 pauseOnHover: true,
                 draggable: false,
                 progress: undefined,
-                theme: "colored",
+                theme: "dark",
             });
         } finally {
             setFaucet_tx_processing(false)
+            setNo_Of_Tokens('0')
             props.onActionComplete()
         }
     };
