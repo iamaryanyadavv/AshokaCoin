@@ -1,4 +1,5 @@
 # AshokaCoin
+https://ashokacoin.netlify.app/
 
 ## CS-2361 Blockchain & Cryptocurrencies Project
 Our project is to implement a blockchain-based project that encompasses the deployment
