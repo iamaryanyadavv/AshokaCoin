@@ -81,9 +81,11 @@ export default function BuyToken(props) {
         }
     }
 
+    const backendIP = process.env.REACT_APP_BACKEND
+
     const sendEthFromFaucet = async (toAddress) => {
         try {
-            const response = await fetch('http://localhost:3001/sendEth', {
+            const response = await fetch(`https://ashokacoin-faucet.onrender.com/sendEth`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
